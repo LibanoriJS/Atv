@@ -169,6 +169,7 @@ if __name__ == '__main__':
       limpar()
 
       while opcaoadm != 0:
+
         tabela = 'professor'
         if opcaoadm == 1:
           print(f'Inserir {tabela}')
@@ -182,7 +183,7 @@ if __name__ == '__main__':
         elif opcaoadm == 4:
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
-          tabela = 'aluno'
+        tabela = 'dataProva' #Dataprova
         if opcaoadm == 5:
           print(f'Inserir {tabela}')
           tabelas.inserir(tabela, conn)
@@ -193,6 +194,34 @@ if __name__ == '__main__':
           print(f'Pesquisar {tabela}')
           tabelas.pesquisar(tabela, conn)
         elif opcaoadm == 8:
+          print(f'Excluir {tabela}')
+          tabelas.excluir(tabela, conn)
+
+        tabela = 'aluno' #
+        if opcaoadm == 5:
+          print(f'Inserir {tabela}')
+          tabelas.inserir(tabela, conn)
+        elif opcaoadm == 6:
+          print(f'Atualizar {tabela}')
+          tabelas.atualizar(tabela, conn)
+        elif opcaoadm == 7:
+          print(f'Pesquisar {tabela}')
+          tabelas.pesquisar(tabela, conn)
+        elif opcaoadm == 8:
+          print(f'Excluir {tabela}')
+          tabelas.excluir(tabela, conn)
+          
+        tabela = 'dataProva' #Dataprova
+        if opcaoadm == 9:
+          print(f'Inserir {tabela}')
+          tabelas.inserir(tabela, conn)
+        elif opcaoadm == 10:
+          print(f'Atualizar {tabela}')
+          tabelas.atualizar(tabela, conn)
+        elif opcaoadm == 11:
+          print(f'Pesquisar {tabela}')
+          tabelas.pesquisar(tabela, conn)
+        elif opcaoadm == 12:
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
         else:
@@ -206,20 +235,11 @@ if __name__ == '__main__':
       opcaoA = aluno()
       limpar()
       
-      while opcaoA != 0: 
-        tabela = 'professor'
+      while opcaoA != 2: 
+        tabela = 'avaliacao'
         if opcaoA == 1:
-          print(f'Inserir {tabela}')
-          tabelas.inserir(tabela, conn)
-        elif opcaoA == 2:
-          print(f'Atualizar {tabela}')
-          tabelas.atualizar(tabela, conn)
-        elif opcaoA == 3:
           print(f'Pesquisar {tabela}')
           tabelas.pesquisar(tabela, conn)
-        elif opcaoA == 4:
-          print(f'Excluir {tabela}')
-          tabelas.excluir(tabela, conn)
         else:
           print('Opção inválida!')
         limpar()
@@ -227,4 +247,8 @@ if __name__ == '__main__':
       limpar()
     else:
       limpar()
-      print("Obrigado. Volte sempre!")
+      print("Obrigado. Volte sempre!")  
+      if opcaoA == 2:
+          tabela= 'aluno'
+          print(f'Pesquisar {tabela}')
+          tabelas.mostrarTudo(tabela, conn)

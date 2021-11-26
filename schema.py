@@ -15,11 +15,11 @@ def criar_tabelas(banco):
     c.execute("""
     CREATE TABLE IF NOT EXISTS aluno (
     matricula INTEGER primary key,
-        nome TEXT NOT NULL,
-        cpf TEXT NOT NULL,
-        dataNasc DATE NOT NULL,
-    siglaCurso TEXT NOT NULL,
-        situacao TEXT NOT NULL,
+    nome TEXT NOT NULL,
+    cpf TEXT NOT NULL,
+    dataNasc DATE NOT NULL,
+    materia TEXT NOT NULL,
+    situacao TEXT NOT NULL,
     criado_em DATE NOT NULL);
     """)
     
@@ -27,7 +27,7 @@ def criar_tabelas(banco):
     c.execute("""
     CREATE TABLE IF NOT EXISTS tipo (
     idTipo INTEGER primary key,
-        materia TEXT NOT NULL,
+    materia TEXT NOT NULL,
     descricao TEXT NOT NULL,
     criado_em DATE NOT NULL);
     """)
@@ -38,19 +38,22 @@ def criar_tabelas(banco):
     idProf INTEGER primary key,
       nome TEXT NOT NULL,
       materia TEXT NOT NULL,
-    criado_em DATE NOT NULL);
+    criado_em DATE NOT NULL,
+    FOREIGN KEY (materia) REFERENCES aluno(materia),
+    )
     """)		
 
     # Executando a instrução de criação da tabela avaliação
     c.execute("""
     CREATE TABLE IF NOT EXISTS avaliacao (
         idAvaliacao INTEGER primary key,
-        siglaMat TEXT NOT NULL,
+        materia TEXT NOT NULL,
         descricao TEXT NOT NULL,
         notaMin DOUBLE NOT NULL,
         notaMax DOUBLE NOT NULL,
         notaAprov DOUBLE NOT NULL,
         dataPrevista DATE NOT NULL,
+        FOREIGN KEY (materia) REFERENCES aluno(materia),
         criado_em DATE NOT NULL)
     """) 
 
@@ -58,14 +61,13 @@ def criar_tabelas(banco):
     c.execute("""
     CREATE TABLE IF NOT EXISTS dataProva (
         idDataProva INTEGER primary key,
-        siglaMat TEXT NOT NULL,
         notaObt DOUBLE NOT NULL,
         dataProva DATE NOT NULL,
         criado_em DATE NOT NULL, 
         matricula INTEGER NOT NULL,
         idProf INTEGER NOT NULL,
         idAvaliacao INTEGER NOT NULL,
-        FOREIGN KEY (matricula) REFERENCES aluno(matricula),
+        FOREIGN KEY (materia) REFERENCES aluno(materia),
         FOREIGN KEY (idProf) REFERENCES professor(idProf),
         FOREIGN KEY (idAvaliacao) REFERENCES avaliacao(idAvaliacao))""")
     print(f"{Cores.BOLD}{Cores.OKGREEN}Tabelas criadas com sucesso!{Cores.ENDC}")
