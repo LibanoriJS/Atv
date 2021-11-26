@@ -28,6 +28,11 @@ def administrador():
   print(f"{Cores.FAIL}7. Ver Alunos Cadastrados{Cores.ENDC}")
   print(f"{Cores.FAIL}8. Excluir Alunos{Cores.ENDC}")  
   print(33 * '*')
+  print(f"{Cores.FAIL}9. Inserir Dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}10. Alterar dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}11. Ver dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}12. Excluir dados boletim{Cores.ENDC}")
+  print(33 * '*')
   print(f"{Cores.FAIL}0. Sair{Cores.ENDC}")
   opcaoadm = int(input("X. Escolha uma opçao : "))
   return opcaoadm
@@ -51,12 +56,16 @@ def professor():
   print(f"{Cores.FAIL}1. Inserir notas{Cores.ENDC}")
   print(f"{Cores.FAIL}2. Alterar notas{Cores.ENDC}")
   print(f"{Cores.FAIL}3. Ver notas{Cores.ENDC}")
-  print(f"{Cores.FAIL}4. Excluir notas{Cores.ENDC}")  
+  print(f"{Cores.FAIL}4. Excluir notas{Cores.ENDC}")
   print(33 * '*')
-  print(f"{Cores.FAIL}5. Sair{Cores.ENDC}")
+  print(f"{Cores.FAIL}5. Inserir Dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}6. Alterar dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}7. Ver dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}8. Excluir dados boletim{Cores.ENDC}")  
+  print(33 * '*')
+  print(f"{Cores.FAIL}0. Sair{Cores.ENDC}")
   opcaop = int(input("X. Escolha uma opçao : "))
   return opcaop
-
 
 def perfil():
   print(33 * '*')
@@ -69,8 +78,7 @@ def perfil():
   print(19 * '*')
   perfil = int(input('X. Selecione uma opção: '))
   return perfil
-  
-  
+    
 def criar_conexao(banco):
 	"""Criando a conexão com o banco de dados Sqlite3."""
 	# Variável conn inicializada para estabelecer a conexão com o banco
@@ -87,13 +95,13 @@ def criar_conexao(banco):
 	except Error as e: 
 		print(e)
 
-
 # Função para limpar a tela antes de exibir a próxima instrução
 def limpar():
     # Importando o módulo do sistema operacional (os) para usar instruções dele
     import os
     # Importando o módulo time para utilizar o método sleep que aguarda o 
     # tempo em segundos informando dentro do parênteses
+    
     from time import sleep
     
     # Função para limpar a tela
@@ -108,7 +116,6 @@ def limpar():
   
     # Chama a função de limpeza
     screen_clear()
-
 
 if __name__ == '__main__':
   limpar()
@@ -135,6 +142,7 @@ if __name__ == '__main__':
       opcaoP = professor()
       limpar()
       #Escolhe as opçoes do usuario 1
+      
       while opcaoP != 5: #alterar informações da avalição
         tabela = 'avaliacao'
         if opcaoP == 1:
@@ -159,6 +167,7 @@ if __name__ == '__main__':
     if opcaoperfil == 2:
       opcaoadm = administrador()
       limpar()
+
       while opcaoadm != 0:
         tabela = 'professor'
         if opcaoadm == 1:
@@ -173,7 +182,7 @@ if __name__ == '__main__':
         elif opcaoadm == 4:
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
-        tabela = 'aluno'
+          tabela = 'aluno'
         if opcaoadm == 5:
           print(f'Inserir {tabela}')
           tabelas.inserir(tabela, conn)
@@ -196,7 +205,8 @@ if __name__ == '__main__':
     if opcaoperfil == 3:
       opcaoA = aluno()
       limpar()
-      while opcaoadm != 0: 
+      
+      while opcaoA != 0: 
         tabela = 'professor'
         if opcaoA == 1:
           print(f'Inserir {tabela}')
@@ -213,7 +223,6 @@ if __name__ == '__main__':
         else:
           print('Opção inválida!')
         limpar()
-
       opcaoperfil = perfil()
       limpar()
     else:
