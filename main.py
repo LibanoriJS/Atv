@@ -28,11 +28,12 @@ def administrador():
   print(f"{Cores.FAIL}7. Ver Alunos Cadastrados{Cores.ENDC}")
   print(f"{Cores.FAIL}8. Excluir Alunos{Cores.ENDC}")  
   print(33 * '*')
-  print(f"{Cores.FAIL}9. Inserir Dados boletim{Cores.ENDC}")
-  print(f"{Cores.FAIL}10. Alterar dados boletim{Cores.ENDC}")
-  print(f"{Cores.FAIL}11. Ver dados boletim{Cores.ENDC}")
-  print(f"{Cores.FAIL}12. Excluir dados boletim{Cores.ENDC}")
+  print(f"{Cores.FAIL}9. Cadastrar tipo de prova{Cores.ENDC}")
+  print(f"{Cores.FAIL}10. Alterar tipo de prova{Cores.ENDC}")
+  print(f"{Cores.FAIL}11. Ver tipo de prova{Cores.ENDC}")
+  print(f"{Cores.FAIL}12. Excluir tipo de prova{Cores.ENDC}")    
   print(33 * '*')
+  
   print(f"{Cores.FAIL}0. Sair{Cores.ENDC}")
   opcaoadm = int(input("X. Escolha uma opçao : "))
   return opcaoadm
@@ -44,19 +45,20 @@ def aluno():
 	print(33 * '*')
 	print(f"{Cores.BOLD}{Cores. OKGREEN}Tabela de escolha :{Cores.ENDC}")
 	print(f"{Cores.FAIL}1. Visualizar notas{Cores.ENDC}")
-	print(f"{Cores.FAIL}2. Sair{Cores.ENDC}")
+	print(f"{Cores.FAIL}0. Sair{Cores.ENDC}")
 	opcaoa = int(input("X. Escolha uma opçao : "))
 	return opcaoa
-  #Opções visualizadas pelo Professor
+
+#Opções visualizadas pelo Professor
 def professor():
   print(33 * '*')
   print(f"{Cores.BOLD}{Cores.OKBLUE}***-- Perfil Professor --***{Cores.ENDC}")
   print(33 * '*')
   print(f"{Cores.BOLD}{Cores. OKGREEN}Tabela de escolha :{Cores.ENDC}")
-  print(f"{Cores.FAIL}1. Inserir notas{Cores.ENDC}")
-  print(f"{Cores.FAIL}2. Alterar notas{Cores.ENDC}")
-  print(f"{Cores.FAIL}3. Ver notas{Cores.ENDC}")
-  print(f"{Cores.FAIL}4. Excluir notas{Cores.ENDC}")
+  print(f"{Cores.FAIL}1. Inserir avaliações{Cores.ENDC}")
+  print(f"{Cores.FAIL}2. Alterar avaliações{Cores.ENDC}")
+  print(f"{Cores.FAIL}3. Ver avaliações{Cores.ENDC}")
+  print(f"{Cores.FAIL}4. Excluir avaliações{Cores.ENDC}")
   print(33 * '*')
   print(f"{Cores.FAIL}5. Inserir Dados boletim{Cores.ENDC}")
   print(f"{Cores.FAIL}6. Alterar dados boletim{Cores.ENDC}")
@@ -67,6 +69,7 @@ def professor():
   opcaop = int(input("X. Escolha uma opçao : "))
   return opcaop
 
+# Exibição do menu principal
 def perfil():
   print(33 * '*')
   print(f"{Cores.BOLD}{Cores.OKBLUE}***-- Controle de Avaliação --**  {Cores.ENDC}")
@@ -74,10 +77,28 @@ def perfil():
   print(f"{Cores.FAIL}1. Perfil Professor{Cores.ENDC}")
   print(f"{Cores.FAIL}2. Perfil Administrador{Cores.ENDC}")
   print(f"{Cores.FAIL}3. Perfil Aluno{Cores.ENDC}")
-  print(f"{Cores.FAIL}{Cores.FAIL}4. Sair{Cores.ENDC}")
+  print(f"{Cores.FAIL}4. Pesquisas Misc{Cores.ENDC}")
+  print(f"{Cores.FAIL}{Cores.FAIL}5. Sair{Cores.ENDC}")
   print(19 * '*')
   perfil = int(input('X. Selecione uma opção: '))
   return perfil
+
+def exercicio():
+  print(33 * '*')
+  print(f"{Cores.BOLD}{Cores.OKBLUE}***-- Exercícios  --**  {Cores.ENDC}")
+  print(33 * '*')
+  print(f"{Cores.FAIL}1. Listar todas as tabelas{Cores.ENDC}")
+  print(f"{Cores.FAIL}2. Listar avaliações por periodo{Cores.ENDC}")
+  print(f"{Cores.FAIL}3. Listar avaliações por professor{Cores.ENDC}")
+  print(f"{Cores.FAIL}4. Listar avaliações por tipo{Cores.ENDC}")
+  print(f"{Cores.FAIL}5. Listar alunos sem avaliações{Cores.ENDC}")
+  print(f"{Cores.FAIL}6. Listar alunos por situação{Cores.ENDC}")
+  print(f"{Cores.FAIL}7. Listar alunos por notas{Cores.ENDC}")
+  print(33 * '*')
+  print(f"{Cores.FAIL}{Cores.FAIL}0. Sair{Cores.ENDC}")
+  print(19 * '*')
+  ex = int(input('X. Selecione uma opção: '))
+  return ex
     
 def criar_conexao(banco):
 	"""Criando a conexão com o banco de dados Sqlite3."""
@@ -133,17 +154,16 @@ if __name__ == '__main__':
   input(f"{Cores.BOLD}{Cores.OKBLUE}Pressione <ENTER> para prosseguir...{Cores.ENDC}")
   limpar()
 
-  #Seleciona o Perfil do usuario
-  
+	#Seleciona o Perfil do usuario 
+
   opcaoperfil = perfil()
   limpar()
-  while opcaoperfil != 4:
+
+  while opcaoperfil != 5:
     if opcaoperfil == 1:
-      opcaoP = professor()
       limpar()
-      #Escolhe as opçoes do usuario 1
-      
-      while opcaoP != 5: #alterar informações da avalição
+      opcaoP = professor()	
+      while opcaoP != 0:
         tabela = 'avaliacao'
         if opcaoP == 1:
           print(f'Inserir {tabela}')
@@ -157,19 +177,37 @@ if __name__ == '__main__':
         elif opcaoP == 4:
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
+
+        tabela = 'dataProva' #Dataprova
+        if opcaoP == 5:
+          print(f'Inserir {tabela}')
+          tabelas.inserir(tabela, conn)
+        elif opcaoP == 6:
+          print(f'Atualizar {tabela}')
+          tabelas.atualizar(tabela, conn)
+        elif opcaoP == 7:
+          print(f'Pesquisar {tabela}')
+          tabelas.pesquisar(tabela, conn)
+        elif opcaoP == 8:
+          print(f'Excluir {tabela}')
+          tabelas.excluir(tabela, conn)
         else:
           print('Opção inválida!')
+          sleep(1)
         limpar()
         opcaoP = professor()
-        limpar()
-
-   #alterar informações do professor
-    if opcaoperfil == 2:
-      opcaoadm = administrador()
+      else:
+        print("Obrigado professor!")
+        sleep(1)
       limpar()
+      opcaoperfil = perfil()	
+
+ 		#alterar informações do professor
+    elif opcaoperfil == 2:
+      limpar()
+      opcaoadm = administrador()
 
       while opcaoadm != 0:
-
         tabela = 'professor'
         if opcaoadm == 1:
           print(f'Inserir {tabela}')
@@ -183,7 +221,10 @@ if __name__ == '__main__':
         elif opcaoadm == 4:
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
-        tabela = 'dataProva' #Dataprova
+
+        #Opções dentro da tabela aluno
+
+        tabela = 'aluno' 
         if opcaoadm == 5:
           print(f'Inserir {tabela}')
           tabelas.inserir(tabela, conn)
@@ -197,58 +238,131 @@ if __name__ == '__main__':
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
 
-        tabela = 'aluno' #
-        if opcaoadm == 5:
-          print(f'Inserir {tabela}')
-          tabelas.inserir(tabela, conn)
-        elif opcaoadm == 6:
-          print(f'Atualizar {tabela}')
-          tabelas.atualizar(tabela, conn)
-        elif opcaoadm == 7:
-          print(f'Pesquisar {tabela}')
-          tabelas.pesquisar(tabela, conn)
-        elif opcaoadm == 8:
-          print(f'Excluir {tabela}')
-          tabelas.excluir(tabela, conn)
-          
-        tabela = 'dataProva' #Dataprova
+#Opções dentro da tabela tipo, usado para provas
+
+        tabela = 'tipo'
         if opcaoadm == 9:
+          tabela = 'tipo'
           print(f'Inserir {tabela}')
           tabelas.inserir(tabela, conn)
         elif opcaoadm == 10:
+          tabela = 'tipo'
           print(f'Atualizar {tabela}')
           tabelas.atualizar(tabela, conn)
         elif opcaoadm == 11:
+          tabela = 'tipo'
           print(f'Pesquisar {tabela}')
           tabelas.pesquisar(tabela, conn)
         elif opcaoadm == 12:
+          tabela = 'tipo'
           print(f'Excluir {tabela}')
           tabelas.excluir(tabela, conn)
-        else:
-          print('Opção inválida!')
-          limpar()
+        else: 
+          print("Opção inválida!")
+          sleep(1)
+        limpar()
         opcaoadm = administrador()
-        limpar()
-   
-  #alterar informações do aluno
-    if opcaoperfil == 3:
-      opcaoA = aluno()
+      else:
+        print("Obrigada administrador!")
+        sleep(1)
       limpar()
-      
-      while opcaoA != 2: 
-        tabela = 'avaliacao'
-        if opcaoA == 1:
-          print(f'Pesquisar {tabela}')
-          tabelas.pesquisar(tabela, conn)
-        else:
-          print('Opção inválida!')
-        limpar()
       opcaoperfil = perfil()
+			
+		#Sistema a ser acessado pelo aluno
+    elif opcaoperfil == 3:
       limpar()
-    else:
+      opcaoA = aluno()
+      while opcaoA != 0:
+        if opcaoA == 1:
+          tabela = 'avaliacao'
+          print(f'Pesquisa Avaçada, Matricula :  {tabela}')
+          tabelas.pesquisarAluno(tabela, conn)
+        else:
+          print("Opção inválida!")
+          sleep(1)
+        limpar()
+        opcaoA = aluno()
+      else:
+        print("Obrigado pelo acesso!")
+        sleep(1)
       limpar()
-      print("Obrigado. Volte sempre!")  
-      if opcaoA == 2:
-          tabela= 'aluno'
-          print(f'Pesquisar {tabela}')
-          tabelas.mostrarTudo(tabela, conn)
+      opcaoperfil = perfil()			
+
+  # Exercicios pedidos do trabalho
+    elif opcaoperfil == 4:
+      limpar()
+      opcaoEx = exercicio()
+      while opcaoEx != 0:
+        if opcaoEx == 1:
+          print(f'Mostrar todas as Tabelas')
+
+          print(f"{Cores.BOLD}{Cores.OKBLUE}Tabela Aluno{Cores.ENDC}")
+          tabela = 'aluno'
+          tabelas.pesquisar(tabela, conn)
+          print('\n')
+
+          print(f"{Cores.BOLD}{Cores.OKBLUE}Tabela Professor{Cores.ENDC}")
+          tabela = 'professor'
+          tabelas.pesquisar(tabela, conn)
+          print('\n')
+
+          print(f"{Cores.BOLD}{Cores.OKBLUE}Tabela Avaliação{Cores.ENDC}")
+          tabela = 'avaliacao'
+          tabelas.pesquisar(tabela, conn)
+          print('\n')
+
+          print(f"{Cores.BOLD}{Cores.OKBLUE}Tabela DataProva{Cores.ENDC}")
+          tabela = 'dataProva'
+          tabelas.pesquisar(tabela, conn)
+          print('\n')
+
+          print(f"{Cores.BOLD}{Cores.OKBLUE}Tabela Tipo{Cores.ENDC}")
+          tabela = 'tipo'
+          tabelas.pesquisar(tabela, conn)
+
+
+        elif opcaoEx == 2:
+          tabela = 'dataProva'
+          faixaPesq='periodo'
+          tabelas.pesquisaEsp(tabela, conn, faixaPesq)
+          print('\n')
+          
+        elif opcaoEx == 3:
+          tabela = 'dataProva'
+          faixaPesq='prof'
+          tabelas.pesquisaEsp(tabela, conn, faixaPesq)
+          print('\n')
+
+        elif opcaoEx == 4:
+            tabela = 'avaliacao'
+            faixaPesq='tipo'
+            tabelas.pesquisaEsp(tabela, conn, faixaPesq)
+            print('\n')
+
+        elif opcaoEx == 5:
+            tabela = 'aluno'
+            tabelas.listarSemAvaliacao(tabela, conn)
+            print('\n')
+        
+        elif opcaoEx == 6:
+            tabela = 'aluno'
+            tabelas.listarSituacao(tabela, conn)
+            print('\n')
+
+        elif opcaoEx == 7:
+            tabela = 'aluno'
+            tabelas.listarNotas(tabela, conn)
+            print('\n')
+        else:
+            print("Opção inválida!")
+            sleep(1)
+        limpar()
+        opcaoEx = exercicio()
+      else:
+        print("Nenhum exercicio encontrado! Use numeros de 1 a 7!")
+        sleep(1)
+      limpar()
+      opcaoperfil = perfil()
+      
+  else:
+    print('Volte sempre!')
